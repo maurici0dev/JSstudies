@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modifiadores de eventos</title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <body>
+    <div id="app">
+      <!-- Interromper evento do mouse com stopPropagation -->
+      <p v-on:mousemove="atualizarXY1">
+        MouseV1: {{ x1 }} e {{ y1 }}
+        <span v-on:mousemove="para">Parar aqui!!</span>
+      </p>
+      <!-- Interromper evento do mouse com modificador de evento stop -->
+      <p v-on:mousemove="atualizarXY2">
+        MouseV2: {{ x2 }} e {{ y2 }}
+        <span v-on:mousemove.stop="">Parar aqui!!</span>
+      </p>
+      <!-- Evitando comportamento padrão de link com o modificador prevent -->
+      <a v-on:click.prevent="" href="http://google.com.br">Google</a>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        x1: 0,
+        y1: 0,
+        x2: 0,
+        y2: 0,
+      },
+      methods: {
+        atualizarXY1(event) {
+          this.x1 = event.clientX;
+          this.y1 = event.clientY;
+        },
+        atualizarXY2(event) {
+          this.x2 = event.clientX;
+          this.y2 = event.clientY;
+        },
+        para(event) {
+          event.stopPropagation();
+        },
+      },
+    });
+  </script>
+</html>

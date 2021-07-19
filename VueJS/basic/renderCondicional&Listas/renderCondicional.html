@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Condicionais de renderização<output></output></title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <body>
+    <div id="app">
+      <template v-if="logado">
+        <p>Usuário logado: {{ name }}</p>
+        <p>Perfil: Admin</p>
+      </template>
+      <p v-else-if="anonimo">Navegando como anônimo</p>
+      <p v-else>Nenhum usuário logado</p>
+      <button @click="logado = !logado">
+        {{ logado ? 'Sair' : 'Entrar' }}
+      </button>
+      <input type="checkbox" v-model="anonimo" />
+      <footer v-show="logado">
+        Desenvolvido por {{ name }}
+      </footer>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        name: "Maurício Nunes",
+        logado: false,
+        anonimo: true,
+      },
+    });
+  </script>
+</html>

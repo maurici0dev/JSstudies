@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos</title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <body>
+    <div id="app">
+      <p>{{ count1 }}</p>
+      <button v-on:click="somar1">Somar 1</button>
+      <p>{{ count2 }}</p>
+      <!-- Passando parametros e evento para metodos -->
+      <button v-on:click="somar2(5, $event)">Somar 1</button>
+      <p v-on:mousemove="atualizarXY">Mouse: {{ x }} e {{ y }}</p>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        count1: 0,
+        count2: 0,
+        x: 0,
+        y: 0,
+      },
+      methods: {
+        somar1() {
+          this.count1++;
+        },
+        somar2(n, event) {
+          this.count2 += n;
+          console.log(event);
+        },
+        atualizarXY(event) {
+          this.x = event.clientX;
+          this.y = event.clientY;
+        },
+      },
+    });
+  </script>
+</html>

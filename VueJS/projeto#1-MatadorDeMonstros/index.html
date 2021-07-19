@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto #1 - Matador de monstro</title>
+  </head>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <body>
+    <div id="app">
+      <div class="panel scores">
+        <div class="score">
+          <h1>Jogador</h1>
+          <div class="life-bar">
+            <div
+              class="life"
+              :class="{danger: player < 20}"
+              :style="{width: player + '%'}"
+            ></div>
+          </div>
+          <div>{{ player }}%</div>
+        </div>
+        <div class="score">
+          <h1>Monstro</h1>
+          <div class="life-bar">
+            <div
+              class="life"
+              :class="{danger: monster < 20}"
+              :style="{width: monster + '%'}"
+            ></div>
+          </div>
+          <div>{{ monster }}%</div>
+        </div>
+      </div>
+      <div v-if="hasResult" class="panel result">
+        <div v-if="monster == 0" class="win">
+          Você ganhou..! ;)
+        </div>
+        <div v-else class="lose">
+          Você perdeu..! :(
+        </div>
+      </div>
+      <div class="panel controls">
+        <template v-if="running">
+          <button class="btn attack" @click="attack(false)">Ataque</button>
+          <button class="btn special-attack" @click="attack(true)">
+            Ataque Especial
+          </button>
+          <button class="btn heal" @click="healAndHurt">Curar</button>
+          <button class="btn give-up" @click="running = false">Desistir</button>
+        </template>
+        <button v-else class="btn new-game" @click="start">
+          Iniciar
+        </button>
+      </div>
+      <div class="panel logs" v-if="logs.length">
+        <ul>
+          <li class="log" v-for="log in logs" :class="log.cls">{{ log.text }}</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>

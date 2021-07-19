@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TemplateV1</title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <body>
+    <div id="app">
+      <!-- template -->
+      <p>{{ titulo }}</p>
+      <!-- V-once -->
+      <p v-once>{{ titulo }}</p>
+      <!-- Chamando metodo -->
+      <p>{{ saudacao() }}</p>
+      <!-- Binding de atributos -->
+      <a v-bind:href="link">Google</a>
+      <hr />
+      <!-- Imprimir HTML puro -->
+      <p>{{ linkHtml }}</p>
+      <p v-html="linkHtml"></p>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        titulo: "Título não atualizado!!!",
+        link: "http://google.com.br",
+        linkHtml: '<a href="http://google.com.br">Google</a>',
+      },
+      methods: {
+        saudacao: function () {
+          this.titulo = "Título atualizado!!!";
+          return this.titulo;
+        },
+      },
+    });
+  </script>
+</html>

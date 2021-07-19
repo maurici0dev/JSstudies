@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estilo CSS dinâmico #3</title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <style>
+    .caixas {
+      display: flex;
+      justify-content: space-around;
+    }
+    .demo {
+      width: 100px;
+      height: 100px;
+      background-color: gray;
+    }
+    .c1 {
+      background-color: red;
+    }
+    .c2 {
+      background-color: green;
+    }
+    .c3 {
+      background-color: blue;
+    }
+    .girar {
+      transform: rotate(45deg);
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div class="caixas">
+        <div class="demo" :class="classeCSS"></div>
+        <div class="demo" :class="[classeCSS, 'girar']"></div>
+        <div class="demo" :class="[classeCSS, {girar: aplicarGirar}]"></div>
+      </div>
+      <hr />
+      <button @click="aplicarGirar = !aplicarGirar">Girar</button>
+      <input type="text" v-model="classeCSS" />
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        aplicarC1: false,
+        classeCSS: "c1",
+        aplicarGirar: false,
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trabalhando com listas<output></output></title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <body>
+    <div id="app">
+      <!-- Construindo lista com v-for -->
+      <ul>
+        <li v-for="(cor, i) in cores">{{ i + 1 }} - {{ cor }}</li>
+      </ul>
+      <input type="text" v-model="adicional" />
+      <button @click="cores.push(adicional)">Adicionar</button>
+      <hr />
+      <!-- Lista com template -->
+      <template v-for="(pessoa, chave, i) in pessoas">
+        <h3>{{ pessoa.nome }}</h3>
+        <div
+          style="border-bottom: 1px solid black;"
+          v-for="(valor, chave, index) in pessoa"
+        >
+          <p>{{index}} - {{ chave }}: {{ valor }}</p>
+        </div>
+      </template>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        cores: ["vermelho", "verde", "amarelo", "azul"],
+        adicional: "",
+        pessoas: [
+          { nome: "Ana", idade: 26, peso: 59 },
+          { nome: "Guilherme", idade: 22, peso: 78 },
+          { nome: "Paulo", idade: 34, peso: 86 },
+        ],
+      },
+    });
+  </script>
+</html>

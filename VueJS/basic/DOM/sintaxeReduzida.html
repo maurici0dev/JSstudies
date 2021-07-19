@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sintaxe reduzida</title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
+  <body>
+    <div id="app">
+      <p>{{ contador }}</p>
+      <!-- v-on reduzido -->
+      <button @click="somar">Somar 1</button>
+      <!-- v-bind reduzido -->
+      <input type="text" :value="contador" />
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        contador: 0,
+      },
+      methods: {
+        somar() {
+          this.contador++;
+        },
+      },
+    });
+  </script>
+</html>

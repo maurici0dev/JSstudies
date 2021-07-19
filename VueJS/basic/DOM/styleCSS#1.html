@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estilo CSS dinâmico #1</title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <style>
+    #app {
+      display: flex;
+      justify-content: space-around;
+    }
+    .demo {
+      width: 100px;
+      height: 100px;
+      background-color: gray;
+    }
+    .c1 {
+      background-color: red;
+    }
+    .c2 {
+      background-color: green;
+    }
+    .c3 {
+      background-color: blue;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div
+        class="demo"
+        :class="{c1: aplicarC1}"
+        @click="aplicarC1 = !aplicarC1"
+      ></div>
+      <div
+        class="demo"
+        :class="{c2: aplicarC2}"
+        @click="aplicarC2 = !aplicarC2"
+      ></div>
+      <div
+        class="demo"
+        :class="{c3: aplicarC3}"
+        @click="aplicarC3 = !aplicarC3"
+      ></div>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        aplicarC1: false,
+        aplicarC2: false,
+        aplicarC3: false,
+      },
+    });
+  </script>
+</html>
