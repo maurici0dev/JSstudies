@@ -1,23 +1,117 @@
 <template>
-  <aside class="menu" v-show="isMenuVisible"></aside>
+  <aside id="menu" v-show="isMenuVisible">
+    <div class="menu-filter">
+      <i class="fa fa-search fa-lg"></i>
+      <input
+        class="filter-field"
+        type="text"
+        placeholder="Filtrar"
+        v-model="treeFilter"
+      />
+    </div>
+    <Tree
+      :data="treeData"
+      :options="treeOptions"
+      :filter="treeFilter"
+      ref="tree"
+    />
+  </aside>
 </template>
 
 <script>
+import { baseApiUrl } from "@/global";
 import { mapState } from "vuex";
+import Tree from "liquor-tree";
+import axios from "axios";
 
 export default {
   name: "Menu",
+  components: { Tree },
+  data: function () {
+    return {
+      treeFilter: "",
+      treeData: this.getTreeData(),
+      treeOptions: {
+        propertyNames: {
+          text: "name",
+        },
+        filter: {
+          emptyText: "Categoria não encontrada",
+        },
+      },
+    };
+  },
   computed: mapState(["isMenuVisible"]),
+  methods: {
+    getTreeData() {
+      const url = `${baseApiUrl}/categories/tree`;
+      return axios.get(url).then((res) => res.data);
+    },
+    onNodeSelect(node) {
+      this.$router.push({
+        name: "articlesByCategory",
+        params: {
+          id: node.id,
+        },
+      });
+    },
+  },
+  mounted() {
+    this.$refs.tree.$on("node:selected", this.onNodeSelect);
+  },
 };
 </script>
 
 <style>
-.menu {
+#menu {
   grid-area: menu;
   background: linear-gradient(to right, #232526, #414345);
 
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+}
+
+#menu .tree .tree-anchor,
+#menu .tree-filter-empty {
+  color: #fff;
+}
+
+#menu .tree-node.selected > .tree-content,
+#menu .tree-node .tree-content:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tree-arrow.has-child {
+  filter: brightness(2);
+}
+
+#menu .menu-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #aaa;
+}
+
+#menu .menu-filter i {
+  color: #aaa;
+  margin-right: 10px;
+}
+
+#menu .menu-filter input {
+  color: #ccc;
+  font-size: 1.3rem;
+  border: 0;
+  outline: 0;
+  width: 100%;
+  background: transparent;
+}
+
+#menu .tree-filter-empty {
+  font-size: 1.3rem;
+  margin-left: 20px;
 }
 </style>
