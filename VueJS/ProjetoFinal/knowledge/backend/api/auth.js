@@ -41,7 +41,7 @@ module.exports = (app) => {
           return res.send(true);
         }
       }
-    } catch (msg) {}
+    } catch (msg) { }
 
     res.send(false);
   };
