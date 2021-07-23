@@ -6,7 +6,8 @@
       :hideUserDropDown="!user"
     />
     <Menu v-if="user" />
-    <Content />
+    <Loading v-if="validatingToken" />
+    <Content v-else />
     <Footer />
   </div>
 </template>
@@ -19,10 +20,11 @@ import Header from "@/components/templates/Header";
 import Menu from "@/components/templates/Menu";
 import Content from "@/components/templates/Content";
 import Footer from "@/components/templates/Footer";
+import Loading from "@/components/templates/Loading";
 
 export default {
   name: "App",
-  components: { Header, Menu, Content, Footer },
+  components: { Header, Menu, Content, Footer, Loading },
   computed: mapState(["isMenuVisible", "user"]),
   data: function () {
     return {
